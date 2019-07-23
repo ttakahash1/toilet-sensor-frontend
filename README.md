@@ -1,3 +1,46 @@
+# 必要なもの
+
+- node.js(v10.2.0)
+- npm(v6.9.0)
+
+※自分は```ndenv```というツールを使ってバージョを指定しています。
+
+# ローカルで開発
+
+まずはパッケージインストールをします。
+
+```
+npm install
+```
+
+ローカルサーバーを立ち上げます。
+
+```
+npm run dev
+```
+http://localhost:5000 でアクセスするとローカルで画面を確認できます。
+
+※開発であまりAPIを叩かない方がいいかと思い、JSONを返すモックサーバーを立てています。```http:localhost:3000/toilet```でアクセスできます。（返すJsonの値はdb.jsonの値です）
+アナログなやり方ですが、```src/commons/fetcher.js```のURLを
+手動で書き換えています。
+
+[typicode/json-server](https://github.com/typicode/json-server)
+
+
+# 注意点
+
+CSS-in-JSを推奨しているのですが、個人的に好きじゃないので、scssを採用しています。
+
+scssの変更を監視してリロードをかけるようにしていますが、svelteのlivereloadの機能と相性が悪いのかたまに変な挙動を起こします。
+その時はscssをビルドすると良いです。
+
+```
+npm run build-css
+```
+
+
+以下、Svelteの
+
 *Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
 ---
