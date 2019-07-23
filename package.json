@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "toilet-sensor-frontend",
   "version": "1.0.0",
   "devDependencies": {
     "json-server": "0.15.0",
