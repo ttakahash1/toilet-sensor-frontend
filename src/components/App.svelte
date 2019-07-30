@@ -1,13 +1,20 @@
 <script>
   export let name;
   export let promise;
+  export let timer;
   import { fetchToiletStatus } from "../commons/fetcher";
   import { convertUtimeToTime } from "../commons/routine";
   promise = fetchToiletStatus();
-  function handleClick() {
+  const handleClick = () => {
     promise = fetchToiletStatus();
-  }
+  };
+  const polling = () => {
+    timer = setInterval(() => {
+      promise = fetchToiletStatus();
+    }, 10000);
+  };
   import Card from "./Card.svelte";
+  import LeakButton from "./LeakButton.svelte";
 </script>
 
 <div class="navbar fixed">
@@ -22,7 +29,11 @@
 <div class="container grid-xs">
   <div class="content">
     {#await promise}
-    <div class="loading loading-lg"></div>
+    <Card
+      status={'loading'}
+      func={handleClick}
+      date={'---'}
+    />
     {:then items}
       {#if items[0].Pir === 0}
       <Card
@@ -36,6 +47,7 @@
         func={handleClick}
         date={convertUtimeToTime(items[0].UpdateAt)}
       />
+      <LeakButton func={polling} />
       {/if}
     {:catch err}
     <Card

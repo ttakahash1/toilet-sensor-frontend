@@ -15,6 +15,9 @@
       使用中
       {:else if status === 'error'}
       エラー発生中
+      {:else if status === 'loading'}
+      <i class="fa fa-circle-notch fa-spin text-gray"/>&nbsp;
+      問い合わせ中
       {/if}
       <small class="float-right text-gray">{date}</small>
     </h5>
@@ -27,11 +30,14 @@
       <i class="fa fa-tired text-warning"/>
       {:else if status === 'error'}
       <i class="fa fa-dizzy text-error"/>
+      {:else if status === 'loading'}
+      <i class="fa fa-meh text-gray"/>
       {/if}
     </div>
   </div>
   <div class="card-footer">
     <button class="btn btn-primary btn-full"
+      disabled={(status === 'loading')}
       on:click={func}>
       <i class="fa fa-sync"/>&nbsp;
       空き状況を更新する

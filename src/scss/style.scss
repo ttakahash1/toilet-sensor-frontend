@@ -44,6 +44,14 @@ body {
   text-align: center;
 }
 
+.btn-ex-lg {
+  width: 3rem !important;
+  height: 3rem;
+  i {
+    font-size: 1.5rem;
+  }
+}
+
 .btn-fixed {
   position: fixed;
   bottom: 1rem;
