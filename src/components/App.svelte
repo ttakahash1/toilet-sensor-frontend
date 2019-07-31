@@ -1,20 +1,18 @@
 <script>
   export let name;
   export let promise;
-  export let timer;
   import { fetchToiletStatus } from "../commons/fetcher";
   import { convertUtimeToTime } from "../commons/routine";
   promise = fetchToiletStatus();
   const handleClick = () => {
     promise = fetchToiletStatus();
   };
-  const polling = () => {
-    timer = setInterval(() => {
-      promise = fetchToiletStatus();
-    }, 10000);
-  };
   import Card from "./Card.svelte";
   import LeakButton from "./LeakButton.svelte";
+
+  const updateStatus = event => {
+    promise = event.detail.promise;
+  };
 </script>
 
 <div class="navbar fixed">
@@ -47,7 +45,7 @@
         func={handleClick}
         date={convertUtimeToTime(items[0].UpdateAt)}
       />
-      <LeakButton func={polling} />
+      <LeakButton on:updateStatus={updateStatus}/>
       {/if}
     {:catch err}
     <Card

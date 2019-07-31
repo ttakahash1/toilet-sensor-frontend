@@ -2,7 +2,7 @@
   "toilet": [{
     "CreateAt": 1563527847071,
     "Light": 151,
-    "Pir": 1,
+    "Pir": 0,
     "UpdateAt": 1563693973641,
     "SensorId": "0000000039cc8616",
     "During": 0
