@@ -3,16 +3,18 @@
   let timer = null;
   import { createEventDispatcher, onDestroy } from "svelte";
   import { fetchToiletStatus } from "../commons/fetcher";
+  import { notify } from "../commons/notify";
 
   const dispach = createEventDispatcher();
   // 10秒に一度ポーリングする。
   // 空いていれば、親コンポーネント（App.svelte）にディスパッチする
-  // TODO: 上記タイミングで
+  // 上記タイミングで通知をだす
   const polling = () => {
     timer = setInterval(() => {
       let prms = fetchToiletStatus();
       prms.then(res => {
         if (res[0].Pir === 0) {
+          notify();
           dispach("updateStatus", { promise: prms });
         }
       });
@@ -20,7 +22,9 @@
   };
   // 破棄される時にタイマーをストップさせる
   onDestroy(() => {
-    clearInterval(timer);
+    if (timer !== null) {
+      clearInterval(timer);
+    }
   });
 </script>
 
