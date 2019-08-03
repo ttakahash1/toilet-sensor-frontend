@@ -3,12 +3,23 @@
   export let promise;
   import { fetchToiletStatus } from "../commons/fetcher";
   import { convertUtimeToTime } from "../commons/routine";
-  promise = fetchToiletStatus();
-  function handleClick() {
-    promise = fetchToiletStatus();
-  }
+  import { initNotification } from "../commons/notify";
+  import Head from "./Head.svelte";
   import Card from "./Card.svelte";
+  import LeakButton from "./LeakButton.svelte";
+  // 通知の許可をとる
+  initNotification();
+  promise = fetchToiletStatus();
+  const handleClick = () => {
+    promise = fetchToiletStatus();
+  };
+  // Promiseの更新を子コンポーネントから受け取る
+  const updateStatus = event => {
+    promise = event.detail.promise;
+  };
 </script>
+
+<Head promise={promise}/>
 
 <div class="navbar fixed">
   <section class="navbar-section">
@@ -22,7 +33,11 @@
 <div class="container grid-xs">
   <div class="content">
     {#await promise}
-    <div class="loading loading-lg"></div>
+    <Card
+      status={'loading'}
+      func={handleClick}
+      date={'---'}
+    />
     {:then items}
       {#if items[0].Pir === 0}
       <Card
@@ -36,6 +51,7 @@
         func={handleClick}
         date={convertUtimeToTime(items[0].UpdateAt)}
       />
+      <LeakButton on:updateStatus={updateStatus}/>
       {/if}
     {:catch err}
     <Card
