@@ -4,18 +4,22 @@
   import { fetchToiletStatus } from "../commons/fetcher";
   import { convertUtimeToTime } from "../commons/routine";
   import { initNotification } from "../commons/notify";
+  import Head from "./Head.svelte";
+  import Card from "./Card.svelte";
+  import LeakButton from "./LeakButton.svelte";
+  // 通知の許可をとる
   initNotification();
   promise = fetchToiletStatus();
   const handleClick = () => {
     promise = fetchToiletStatus();
   };
-  import Card from "./Card.svelte";
-  import LeakButton from "./LeakButton.svelte";
   // Promiseの更新を子コンポーネントから受け取る
   const updateStatus = event => {
     promise = event.detail.promise;
   };
 </script>
+
+<Head promise={promise}/>
 
 <div class="navbar fixed">
   <section class="navbar-section">
