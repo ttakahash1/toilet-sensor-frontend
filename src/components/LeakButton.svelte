@@ -18,7 +18,7 @@
           dispach("updateStatus", { promise: prms });
         }
       });
-    }, 10000);
+    }, 5000);
   };
   // 破棄される時にタイマーをストップさせる
   onDestroy(() => {
