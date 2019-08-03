@@ -4,8 +4,7 @@ const app = new App({
   target: document.body,
   props: {
     name: 'Toilet Checker',
-    promise: null,
-    timer: null
+    promise: null
   }
 });
 
