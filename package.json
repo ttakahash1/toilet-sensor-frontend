@@ -28,6 +28,7 @@
     "start:dev": "sirv public --single --dev",
     "build-css": "node-sass-chokidar src/scss/style.scss -o public/",
     "watch-css": "npm run build-css && node-sass-chokidar src/scss/style.scss -o  public/ --watch --recursive",
-    "json-serve": "json-server --watch db.json"
+    "json-serve": "json-server --watch db.json",
+    "deploy": "npm run build && firebase deploy"
   }
 }

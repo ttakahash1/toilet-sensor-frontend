@@ -18,4 +18,10 @@ export const initNotification = () => {
       }
     });
   }
-}
+};
+
+export const getPermission = () => {
+  if (("Notification" in window)) {
+    return Notification.permission;
+  }
+};
