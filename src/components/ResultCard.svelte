@@ -2,6 +2,7 @@
   export let results;
   export let func;
   import { createEventDispatcher, onMount } from "svelte";
+  import { convertUtimeToTime } from "../commons/routine";
   let disable = 0;
   let enable = 0;
   for (let i = 0, l = results.length; i < l; i++) {
@@ -18,11 +19,15 @@
   const iconClasses = ["fa fa-smile text-success", "fa fa-tired text-warning"];
 </script>
 
-<div class="card">
+<div class="card result-card">
   <div class="card-header">
   <h5>
-    &nbsp;<i class="fa fa-check-circle text-success"/>&nbsp;{enable}室
-    &nbsp;<i class="fa fa-exclamation-triangle text-warning"/>&nbsp;{disable}室
+    {#if enable > 0}
+      <i class="fa fa-check-circle text-success"/>&nbsp;{enable}室の空きがあります
+    {:else}
+      <i class="fa fa-exclamation-triangle text-warning"/>&nbsp;空きがありません
+    {/if}
+    <small class="float-right text-gray">{convertUtimeToTime(results[0].UpdateAt)}</small>
   </h5>
   </div>
   <div class="card-body">

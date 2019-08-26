@@ -15,7 +15,7 @@
     </h5>
   </div>
   <div class="card-body">
-    <div class="toilet-status">s
+    <div class="toilet-status">
       {#if status === 'error'}
       <i class="fa fa-dizzy text-error"/>
       {:else if status === 'loading'}

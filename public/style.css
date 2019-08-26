@@ -4099,8 +4099,9 @@ body {
     display: block;
     font-size: 150px;
     text-align: center; }
-  .card .icon-wrapper {
-    text-align: center;
-    margin: 1rem 0; }
-    .card .icon-wrapper i {
-      font-size: 3.5rem; }
+
+.result-card .icon-wrapper {
+  text-align: center;
+  margin: 1rem 0; }
+  .result-card .icon-wrapper i {
+    font-size: 5.5rem; }

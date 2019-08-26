@@ -2,7 +2,6 @@
   export let name;
   export let promise;
   import { fetchMultiSensors } from "../commons/fetcher";
-  import { convertUtimeToTime } from "../commons/routine";
   import { initNotification } from "../commons/notify";
   import Head from "./Head.svelte";
   import Card from "./Card.svelte";
