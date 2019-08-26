@@ -4078,11 +4078,6 @@ body {
   .container .content {
     padding: 1rem; }
 
-.toilet-status i {
-  display: block;
-  font-size: 150px;
-  text-align: center; }
-
 .btn-full {
   width: 100%;
   text-align: center; }
@@ -4097,3 +4092,15 @@ body {
   position: fixed;
   bottom: 1rem;
   right: 1rem; }
+
+.card {
+  margin-bottom: 1rem; }
+  .card .toilet-status i {
+    display: block;
+    font-size: 150px;
+    text-align: center; }
+  .card .icon-wrapper {
+    text-align: center;
+    margin: 1rem 0; }
+    .card .icon-wrapper i {
+      font-size: 3.5rem; }

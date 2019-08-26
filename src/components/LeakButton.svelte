@@ -2,20 +2,27 @@
   let clicked = false;
   let timer = null;
   import { createEventDispatcher, onDestroy } from "svelte";
-  import { fetchToiletStatus } from "../commons/fetcher";
+  import { fetchMultiSensors } from "../commons/fetcher";
   import { notify, getPermission } from "../commons/notify";
   const permit = getPermission();
-  const dispach = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   // 10秒に一度ポーリングする。
   // 空いていれば、親コンポーネント（App.svelte）にディスパッチする
   // 上記タイミングで通知をだす
   const polling = () => {
     timer = setInterval(() => {
-      let prms = fetchToiletStatus();
+      let prms = fetchMultiSensors();
       prms.then(res => {
-        if (res[0].Pir === 0) {
+        let enableCnt = 0;
+        for (let i = 0, l = res.length; i < l; i++) {
+          if (res[i].Pir === 0) {
+            enableCnt++;
+          }
+        }
+        console.log(enableCnt);
+        if (enableCnt > 0) {
           notify();
-          dispach("updateStatus", { promise: prms });
+          dispatch("updateStatus", { promise: prms });
         }
       });
     }, 5000);

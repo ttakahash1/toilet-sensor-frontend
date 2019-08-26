@@ -1,0 +1,17 @@
+.card {
+  margin-bottom: 1rem;
+  .toilet-status {
+    i {
+      display: block;
+      font-size: 150px;
+      text-align: center;
+    }
+  }
+  .icon-wrapper {
+    text-align: center;
+    margin: 1rem 0;
+    i {
+      font-size: 3.5rem;
+    }
+  }
+}

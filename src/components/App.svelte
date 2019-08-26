@@ -1,21 +1,27 @@
 <script>
   export let name;
   export let promise;
-  import { fetchToiletStatus } from "../commons/fetcher";
+  import { fetchMultiSensors } from "../commons/fetcher";
   import { convertUtimeToTime } from "../commons/routine";
   import { initNotification } from "../commons/notify";
   import Head from "./Head.svelte";
   import Card from "./Card.svelte";
   import LeakButton from "./LeakButton.svelte";
+  import ResultCard from "./ResultCard.svelte";
   // 通知の許可をとる
   initNotification();
-  promise = fetchToiletStatus();
+  promise = fetchMultiSensors();
   const handleClick = () => {
-    promise = fetchToiletStatus();
+    promise = fetchMultiSensors();
   };
-  // Promiseの更新を子コンポーネントから受け取る
+  // Promiseの更新をLeakButtonから受け取る
   const updateStatus = event => {
     promise = event.detail.promise;
+  };
+  // 利用可能なトイレ数をResultCardから受け取る
+  let enableCnt = -1;
+  const updateEnableCnt = event => {
+    enableCnt = event.detail.enableCnt;
   };
 </script>
 
@@ -36,29 +42,22 @@
     <Card
       status={'loading'}
       func={handleClick}
-      date={'---'}
     />
     {:then items}
-      {#if items[0].Pir === 0}
-      <Card
-        status={'enable'}
-        func={handleClick}
-        date={convertUtimeToTime(items[0].UpdateAt)}
-      />
-      {:else}
-      <Card
-        status={'disable'}
-        func={handleClick}
-        date={convertUtimeToTime(items[0].UpdateAt)}
-      />
-      <LeakButton on:updateStatus={updateStatus}/>
-      {/if}
+    <ResultCard
+      results={items.result}
+      func={handleClick}
+      on:updateEnableCnt={updateEnableCnt}
+    />
     {:catch err}
     <Card
       status={'error'}
       func={handleClick}
-      date={'---'}
     />
     {/await}
   </div>
 </div>
+
+{#if enableCnt === 0}
+<LeakButton on:updateStatus={updateStatus}/>
+{/if}
