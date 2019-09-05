@@ -32,13 +32,6 @@ body {
   }
 }
 
-.toilet-status {
-  i {
-    display: block;
-    font-size: 150px;
-    text-align: center;
-  }
-}
 .btn-full {
   width: 100%;
   text-align: center;
@@ -57,3 +50,5 @@ body {
   bottom: 1rem;
   right: 1rem;
 }
+
+@import "card";
