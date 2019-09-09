@@ -44,7 +44,7 @@
     />
     {:then items}
     <ResultCard
-      results={items.result}
+      results={items.results}
       func={handleClick}
       on:updateEnableCnt={updateEnableCnt}
     />

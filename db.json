@@ -8,7 +8,7 @@
     "During": 0
   }],
   "restroom": {
-    "result": [{
+    "results": [{
       "SensorId": "0000000026990e55",
       "UpdateAt": 1566026658014,
       "Pir": 0
