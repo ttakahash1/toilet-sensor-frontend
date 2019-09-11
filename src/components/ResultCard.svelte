@@ -22,15 +22,20 @@
 <div class="card result-card">
   <div class="card-header">
   <h5>
+  {#if results.length > 0}
     {#if enable > 0}
-      <i class="fa fa-check-circle text-success"/>&nbsp;{enable}室の空きがあります
+    <i class="fa fa-check-circle text-success"/>&nbsp;{enable}室の空きがあります
     {:else}
-      <i class="fa fa-exclamation-triangle text-warning"/>&nbsp;空きがありません
+    <i class="fa fa-exclamation-triangle text-warning"/>&nbsp;空きがありません
     {/if}
     <small class="float-right text-gray">{convertUtimeToTime(results[0].UpdateAt)}</small>
+  {:else}
+    <i class="fa fa-exclamation-triangle text-warning"/>&nbsp;取得できませんでした。
+  {/if}
   </h5>
   </div>
   <div class="card-body">
+    {#if results.length > 0}
     <div class="columns">
       {#each results as result}
       <div class="column">
@@ -40,6 +45,11 @@
       </div>
       {/each}
     </div>
+    {:else}
+    <div class="toilet-status">
+      <i class="fa fa-dizzy text-error"/>
+    </div>
+    {/if}
   </div>
   <div class="card-footer">
     <button class="btn btn-primary btn-full"
