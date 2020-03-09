@@ -14,8 +14,8 @@
       let prms = fetchMultiSensors();
       prms.then(res => {
         let enableCnt = 0;
-        for (let i = 0, l = res.result.length; i < l; i++) {
-          if (res.result[i].Pir === 0) {
+        for (let i = 0, l = res.results.length; i < l; i++) {
+          if (res.results[i].Pir === 0) {
             enableCnt++;
           }
         }
